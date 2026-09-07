@@ -1,0 +1,220 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Required for Gallery 3D Z-depth animation (CodePen: daniel-mu-oz/gbaVNwL) */
+@property --translate-z {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: -3000px;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--atom-background);
+    color: var(--atom-text-primary);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--atom-signal-soft);
+    color: var(--atom-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--atom-focus-ring);
+    outline-offset: 3px;
+  }
+
+  /* Prefer calm defaults; heavy motion lives in intentional sections. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-status {
+    font-family: var(--font-mono);
+    font-feature-settings: "ss01" 1, "tnum" 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Neutral CTAs — foundation classes; do not use signal/orange fills here */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--atom-cta-primary-bg);
+    color: var(--atom-cta-primary-text);
+    border: 1px solid transparent;
+  }
+
+  .btn-primary:hover {
+    background-color: #ffffff;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--atom-cta-secondary-bg);
+    color: var(--atom-cta-secondary-text);
+    border: 1px solid var(--atom-cta-secondary-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: color-mix(in srgb, var(--atom-text-secondary) 45%, var(--atom-border));
+    background-color: color-mix(in srgb, var(--atom-elevated) 55%, transparent);
+  }
+}
+
+/* Gallery 3D — 1:1 motion model from codepen.io/daniel-mu-oz/pen/gbaVNwL */
+.gallery-3d-section {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  background-color: var(--atom-background);
+  overflow: hidden;
+}
+
+.gallery-3d-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  background-color: var(--atom-background);
+}
+
+.gallery-3d-copy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  max-width: 28rem;
+  padding-inline: 1.25rem;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.gallery-3d-img {
+  position: absolute;
+  inset-inline: 0;
+  margin: auto;
+  width: 20rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 0.35rem;
+  will-change: transform, opacity;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.gallery-3d-img--odd {
+  left: var(--left, 0rem);
+  transform: translateZ(var(--translate-z))
+    translate(-25rem, calc((var(--i) - (var(--count) + 1) / 2) * 8rem));
+  animation:
+    gallery-3d-move var(--duration) linear infinite,
+    gallery-3d-opacity var(--duration) linear infinite;
+  animation-delay:
+    calc(var(--duration) / var(--count) * (var(--i) - 1) - var(--duration)),
+    calc(var(--duration) / var(--count) * (var(--i) - 1) - var(--duration));
+}
+
+.gallery-3d-img--even {
+  right: var(--right, 0rem);
+  transform: translateZ(var(--translate-z))
+    translate(25rem, calc((var(--i) - (var(--count) + 1) / 2) * -8rem));
+  animation:
+    gallery-3d-move var(--duration) linear infinite,
+    gallery-3d-opacity var(--duration) linear infinite;
+  animation-delay:
+    calc(var(--duration) / var(--count) * (var(--i) - 1) - var(--duration)),
+    calc(var(--duration) / var(--count) * (var(--i) - 1) - var(--duration));
+}
+
+.gallery-3d-img--odd:hover,
+.gallery-3d-img--even:hover {
+  animation-play-state: paused;
+}
+
+.gallery-3d-stage:not([data-active="true"]) .gallery-3d-img {
+  animation-play-state: paused;
+}
+
+@keyframes gallery-3d-opacity {
+  0% {
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  90%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes gallery-3d-move {
+  0% {
+    opacity: 0;
+    --translate-z: -5000px;
+  }
+  100% {
+    --translate-z: 2000px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-3d-img--odd,
+  .gallery-3d-img--even {
+    animation: none !important;
+    opacity: 1 !important;
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: 100%;
+    will-change: auto !important;
+  }
+
+  .gallery-3d-stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    min-height: 0;
+    height: auto;
+    padding: 2rem 1.25rem 4rem;
+    perspective: none;
+  }
+}

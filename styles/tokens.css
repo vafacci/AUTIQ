@@ -1,0 +1,64 @@
+/*
+  Design tokens — ATOM / Content Autopilot
+
+  Palette is overwhelmingly black / charcoal / white / grey.
+  Orange (#C4510C) is a SYSTEM SIGNAL only — never a large brand fill,
+  never primary CTA fill, never large orange sections/cards/gradients.
+*/
+
+:root {
+  /* Surfaces */
+  --atom-background: #070809;
+  --atom-surface: #0d0f12;
+  --atom-elevated: #13161a;
+  --atom-border: #24282e;
+
+  /* Text */
+  --atom-text-primary: #f4f5f6;
+  --atom-text-secondary: #8b9098;
+
+  /*
+    Signal accent — PROCESSING / ACTIVE / status dots / path energy /
+    selected technical states / tiny highlights only.
+  */
+  --atom-signal: #c4510c;
+  --atom-signal-hover: #df5a08;
+  --atom-signal-soft: #241006;
+
+  /* Focus — thin ring; signal is acceptable as precise technical feedback */
+  --atom-focus-ring: #c4510c;
+
+  /*
+    CTAs stay neutral premium — never orange.
+    Primary: white fill / black text
+    Secondary: transparent / subtle border / white text
+  */
+  --atom-cta-primary-bg: #f4f5f6;
+  --atom-cta-primary-text: #070809;
+  --atom-cta-secondary-bg: transparent;
+  --atom-cta-secondary-text: #f4f5f6;
+  --atom-cta-secondary-border: #24282e;
+
+  /* Spacing rhythm (reference) */
+  --space-section-y: clamp(4rem, 10vw, 8rem);
+  --space-content-x: clamp(1.25rem, 4vw, 3rem);
+  --content-max: 72rem;
+}
+
+@theme inline {
+  --color-background: var(--atom-background);
+  --color-surface: var(--atom-surface);
+  --color-elevated: var(--atom-elevated);
+  --color-border: var(--atom-border);
+  --color-text-primary: var(--atom-text-primary);
+  --color-text-secondary: var(--atom-text-secondary);
+  --color-signal: var(--atom-signal);
+  --color-signal-hover: var(--atom-signal-hover);
+  --color-signal-soft: var(--atom-signal-soft);
+  --color-cta-primary: var(--atom-cta-primary-bg);
+  --color-cta-primary-fg: var(--atom-cta-primary-text);
+  --color-cta-secondary-fg: var(--atom-cta-secondary-text);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
