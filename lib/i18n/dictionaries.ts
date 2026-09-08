@@ -7,7 +7,7 @@ export const da: Dictionary = {
     tagline: "Automatisér det gentagne arbejde uden at give slip på kontrollen.",
   },
   nav: {
-    howItWorks: "Sådan virker det",
+    howItWorks: "Workflow",
     platforms: "Platforme",
     pricing: "Priser",
     qa: "Spørgsmål",

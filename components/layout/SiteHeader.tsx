@@ -114,13 +114,13 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
                   {link.label}
                 </a>
               ))}
-              <LanguageSwitch className="ml-1" />
               <ButtonLink
                 href={primaryCta.href}
-                className="ml-2 h-9 px-4 py-0 text-[12px]"
+                className="ml-1 h-9 px-4 py-0 text-[12px]"
               >
                 {t.nav.book}
               </ButtonLink>
+              <LanguageSwitch className="ml-3" />
             </nav>
 
             <div className="flex items-center gap-2 md:hidden">
