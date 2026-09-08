@@ -8,7 +8,7 @@ import { HeroPlatformSignal } from "./hero/HeroPlatformSignal";
 import { useLocale } from "@/components/providers/locale-provider";
 
 const heroCtaClass =
-  "h-10 w-[9.75rem] px-0 text-[11px] font-medium uppercase tracking-[0.08em]";
+  "h-10 shrink-0 whitespace-nowrap px-3.5 text-[11px] font-medium uppercase tracking-[0.08em] sm:px-4";
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -59,7 +59,6 @@ export function Hero() {
               {...fade(0.08)}
             >
               <p>{t.hero.body1}</p>
-              <p>{t.hero.body2}</p>
             </motion.div>
 
             <motion.div

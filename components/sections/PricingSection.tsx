@@ -31,10 +31,6 @@ export function PricingSection() {
             <PricingCard key={tier.id} tier={tier} />
           ))}
         </div>
-
-        <p className="mt-8 text-center font-status text-[10px] tracking-[0.08em] text-text-secondary/70 md:mt-10">
-          {t.pricing.thirdParty}
-        </p>
       </div>
     </section>
   );

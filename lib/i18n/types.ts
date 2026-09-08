@@ -13,6 +13,7 @@ export type Dictionary = {
     howItWorks: string;
     platforms: string;
     pricing: string;
+    qa: string;
     book: string;
     back: string;
     openMenu: string;
@@ -24,7 +25,6 @@ export type Dictionary = {
     headlineLine1: string;
     headlineLine2: string;
     body1: string;
-    body2: string;
     book: string;
     howItWorks: string;
     scrollLabel: string;
@@ -54,12 +54,20 @@ export type Dictionary = {
     setup: string;
     perMonth: string;
     book: string;
-    thirdParty: string;
     tiers: Record<
       string,
       {
         name: string;
         inclusions: string[];
+      }
+    >;
+  };
+  qa: {
+    items: Record<
+      string,
+      {
+        question: string;
+        answer: string;
       }
     >;
   };

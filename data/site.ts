@@ -9,7 +9,7 @@ export const site = {
     "AUTIQ builds automation systems for creators and content teams — moving finished content from creation to publication, with human control where it matters.",
   url: "https://autiq.dk",
   locale: "da",
-  currency: "USD",
+  currency: "DKK",
   email: "vafaivafai@gmail.com",
   phone: "+45 20996967",
   phoneHref: "tel:+4520996967",

@@ -7,6 +7,7 @@ export const navLinks: NavLink[] = [
   { label: "How it works", href: "/#how-it-works" },
   { label: "Platforms", href: "/#platforms" },
   { label: "Pricing", href: "/#pricing" },
+  { label: "FAQ", href: "/#qa" },
 ];
 
 export const primaryCta = {

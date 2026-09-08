@@ -1,8 +1,8 @@
 export { site } from "./site";
-export { pricingTiers, pricingNotes } from "./pricing";
+export { pricingTiers } from "./pricing";
 export { workflowStates, workflowPipeline } from "./workflow-states";
 export { integrations, deploymentOptions } from "./integrations";
-export { faqs } from "./faqs";
+export { faqIds } from "./faqs";
 export { navLinks, primaryCta } from "./navigation";
 export { heroPlatforms, socialPlatforms, platformsIntro } from "./platforms";
 export {

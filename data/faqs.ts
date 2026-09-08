@@ -1,14 +1,7 @@
 /**
- * FAQ stubs — content to be written during later copy passes.
+ * FAQ item ids — copy lives in i18n dictionaries.
  */
 
-export type FaqItem = {
-  id: string;
-  question: string;
-  answer: string;
-  category: "product" | "pricing" | "deployment" | "pilot";
-};
+export type FaqId = "control" | "ready" | "timeline" | "commitment";
 
-export const faqs: FaqItem[] = [
-  // Intentionally empty until copy is authored section-by-section.
-];
+export const faqIds: FaqId[] = ["control", "ready", "timeline", "commitment"];

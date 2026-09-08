@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { WorkflowSection } from "@/components/sections/WorkflowSection";
 import { PlatformsSection } from "@/components/sections/PlatformsSection";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { FaqSection } from "@/components/sections/FaqSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <WorkflowSection />
         <PlatformsSection />
         <PricingSection />
+        <FaqSection />
       </main>
       <SiteFooter />
     </>

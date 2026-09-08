@@ -1,13 +1,17 @@
 /**
  * Public pricing — single source of truth.
- * Amounts in USD (converted from DKK list prices at ~0.155).
+ * DKK is the list currency; USD is the English display conversion (~0.155).
  */
+
+import type { Locale } from "@/lib/i18n/types";
 
 export type PricingTierId = "content-autopilot" | "autopilot-pro";
 
 export type PricingTier = {
   id: PricingTierId;
   name: string;
+  setupDkk: number | null;
+  monthlyDkk: number | null;
   setupUsd: number | null;
   monthlyUsd: number | null;
   description: string | null;
@@ -25,6 +29,8 @@ export const pricingTiers: PricingTier[] = [
   {
     id: "content-autopilot",
     name: "Content Autopilot",
+    setupDkk: 4995,
+    monthlyDkk: 995,
     setupUsd: 775,
     monthlyUsd: 155,
     description: null,
@@ -38,6 +44,8 @@ export const pricingTiers: PricingTier[] = [
   {
     id: "autopilot-pro",
     name: "Autopilot Pro",
+    setupDkk: 7995,
+    monthlyDkk: 1995,
     setupUsd: 1240,
     monthlyUsd: 310,
     description: null,
@@ -49,11 +57,21 @@ export const pricingTiers: PricingTier[] = [
   },
 ];
 
-export const pricingNotes = {
-  thirdParty: "Third-party software costs are billed separately.",
-} as const;
-
 /** Plain integer string — no grouping commas. */
 export function formatUsd(amount: number): string {
   return String(Math.round(amount));
+}
+
+/** Danish display: 4995,- (no "kr", no thousand separator). English: $775 */
+export function formatMoney(
+  amountDkk: number | null,
+  amountUsd: number | null,
+  locale: Locale,
+): string {
+  if (locale === "da") {
+    if (amountDkk === null) return "—";
+    return `${Math.round(amountDkk)},-`;
+  }
+  if (amountUsd === null) return "—";
+  return `$${formatUsd(amountUsd)}`;
 }

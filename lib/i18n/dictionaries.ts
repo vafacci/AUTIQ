@@ -3,13 +3,14 @@ import type { Dictionary } from "./types";
 export const da: Dictionary = {
   meta: {
     description:
-      "AUTIQ bygger automationssystemer til creators og content-teams — fra færdigt indhold til publicering, med menneskelig kontrol hvor det betyder noget.",
+      "AUTIQ bygger automationssystemer til creators og content-teams — fra færdigt content til publicering, med menneskelig kontrol hvor det betyder noget.",
     tagline: "Automatisér det gentagne arbejde uden at give slip på kontrollen.",
   },
   nav: {
     howItWorks: "Sådan virker det",
     platforms: "Platforme",
     pricing: "Priser",
+    qa: "Spørgsmål",
     book: "Book en samtale",
     back: "Tilbage",
     openMenu: "Åbn menu",
@@ -18,24 +19,23 @@ export const da: Dictionary = {
     mobile: "Mobil",
   },
   hero: {
-    headlineLine1: "Dit indhold,",
-    headlineLine2: "der kører af sig selv.",
+    headlineLine1: "Dit content",
+    headlineLine2: "på autopilot",
     body1:
-      "Fra færdigt indhold til godkendt, planlagt og publiceret — automatisk.",
-    body2: "Du beholder kontrollen, hvor det betyder noget.",
+      "Fra færdigt content til godkendt, planlagt og publiceret — helt automatisk.",
     book: "Book en samtale",
     howItWorks: "Sådan virker det",
     scrollLabel: "Scroll til sådan virker det",
     platformsLabel: "Publicerer til Instagram, TikTok og YouTube",
   },
   workflow: {
-    headlineLine1: "Fra færdigt indhold",
-    headlineLine2: "til publiceret opslag.",
-    support: "Vi automatiserer det gentagne arbejde imellem.",
+    headlineLine1: "Fra færdigt content",
+    headlineLine2: "til publiceret opslag",
+    support: "Vi klarer det gentagne arbejde imellem.",
     stages: {
       drop: {
         title: "Læg det ind",
-        microcopy: "Tilføj færdigt indhold til din normale workflow.",
+        microcopy: "Tilføj dit content til jeres workflow.",
         nodeLabel: "Video",
         activeStatus: "Modtaget",
         completeStatus: "Klar",
@@ -49,14 +49,15 @@ export const da: Dictionary = {
       },
       control: {
         title: "Du beholder kontrollen",
-        microcopy: "Gennemgå kun dér, hvor menneskelig vurdering betyder noget.",
+        microcopy:
+          "Du får besked, før vi poster. Ret caption og hashtags, eller godkend med ét klik.",
         nodeLabel: "Review",
         activeStatus: "Venter",
         completeStatus: "Godkendt",
       },
       schedule: {
         title: "Det går videre",
-        microcopy: "Godkendt indhold går automatisk videre.",
+        microcopy: "Godkendt content går automatisk videre.",
         nodeLabel: "Planlæg",
         activeStatus: "Router",
         completeStatus: "Planlagt",
@@ -71,15 +72,14 @@ export const da: Dictionary = {
     },
   },
   platforms: {
-    heading: "Socialt indhold",
+    heading: "Socialt content",
   },
   pricing: {
-    headlineLine1: "Enkel prissætning.",
-    headlineLine2: "Bygget omkring dit indhold.",
+    headlineLine1: "Enkel prissætning",
+    headlineLine2: "Bygget omkring dit content",
     setup: "opstart",
     perMonth: "/ md.",
     book: "Book en samtale",
-    thirdParty: "Tredjeparts-software faktureres separat.",
     tiers: {
       "content-autopilot": {
         name: "Content Autopilot",
@@ -99,6 +99,30 @@ export const da: Dictionary = {
       },
     },
   },
+  qa: {
+    items: {
+      control: {
+        question: "Mister jeg kontrollen over mit content?",
+        answer:
+          "Nej. Intet går live uden din godkendelse. Du skaber — vi klarer det gentagne.",
+      },
+      ready: {
+        question: "Hvad skal jeg have klar for at komme i gang?",
+        answer:
+          "Færdigt content og de kanaler, I allerede publicerer på. Vi mapper resten sammen på samtalen.",
+      },
+      timeline: {
+        question: "Hvor lang tid tager det at sætte op?",
+        answer:
+          "Typisk et par dage, når vi kender jeres workflow — ikke uger.",
+      },
+      commitment: {
+        question: "Er samtalen uforpligtende?",
+        answer:
+          "Ja. 30 minutter. Ingen binding. Vi finder ud af, om det giver mening for dig.",
+      },
+    },
+  },
   footer: {
     navigation: "Navigation",
     contact: "Kontakt",
@@ -107,18 +131,18 @@ export const da: Dictionary = {
   booking: {
     title: "Book en samtale",
     description:
-      "Book en 30-minutters samtale med AUTIQ. En kort snak om din content-workflow, og hvor automation passer ind.",
+      "Book en 30-minutters samtale med AUTIQ. En kort snak om jeres content-workflow, og hvor automation giver mening.",
     eyebrow: "Book en samtale",
-    headline: "Lad os se, hvad vi kan automatisere.",
+    headline: "Lad os se, hvad vi kan automatisere",
     support:
-      "En kort samtale om din content-workflow, og hvor automation passer ind.",
+      "En kort samtale om jeres content-workflow, og hvor automation giver mening.",
     details: {
       duration: "30 minutter",
-      format: "Video-call",
+      format: "Videoopkald",
       commitment: "Uforpligtende",
     },
     successEyebrow: "Samtale booket",
-    successHeadline: "Vi kigger på din workflow inden vi taler.",
+    successHeadline: "Vi reviewer jeres workflow, inden vi taler",
     successSupport: "Du får en bekræftelse på mail med mødedetaljerne.",
     backHome: "Tilbage til AUTIQ",
   },
@@ -137,6 +161,7 @@ export const en: Dictionary = {
     howItWorks: "How it works",
     platforms: "Platforms",
     pricing: "Pricing",
+    qa: "FAQ",
     book: "Book a call",
     back: "Back",
     openMenu: "Open menu",
@@ -149,7 +174,6 @@ export const en: Dictionary = {
     headlineLine2: "moving by itself.",
     body1:
       "From finished content to approved, scheduled and published — automatically.",
-    body2: "You stay in control where it matters.",
     book: "Book a call",
     howItWorks: "How it works",
     scrollLabel: "Scroll to how it works",
@@ -206,7 +230,6 @@ export const en: Dictionary = {
     setup: "setup",
     perMonth: "/ month",
     book: "Book a call",
-    thirdParty: "Third-party software costs are billed separately.",
     tiers: {
       "content-autopilot": {
         name: "Content Autopilot",
@@ -223,6 +246,30 @@ export const en: Dictionary = {
           "Advanced workflows",
           "Priority support",
         ],
+      },
+    },
+  },
+  qa: {
+    items: {
+      control: {
+        question: "Do I lose control of my content?",
+        answer:
+          "No. Nothing goes live without your approval where you want to keep it. You create — the system handles the repetitive work.",
+      },
+      ready: {
+        question: "What do I need ready to get started?",
+        answer:
+          "Finished content and the channels you already publish to. We map the rest together on the call.",
+      },
+      timeline: {
+        question: "How long does setup take?",
+        answer:
+          "Once the workflow is mapped, setup is typically a few days — not weeks.",
+      },
+      commitment: {
+        question: "Is the call free of commitment?",
+        answer:
+          "Yes. 30 minutes. No lock-in. We figure out whether it makes sense for you.",
       },
     },
   },

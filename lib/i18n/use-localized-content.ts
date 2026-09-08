@@ -13,6 +13,7 @@ export function useNavLinks() {
       { label: t.nav.howItWorks, href: navHrefs[0].href },
       { label: t.nav.platforms, href: navHrefs[1].href },
       { label: t.nav.pricing, href: navHrefs[2].href },
+      { label: t.nav.qa, href: navHrefs[3].href },
     ],
     [t],
   );

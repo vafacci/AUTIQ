@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { cn } from "@/lib/cn";
 import { primaryCta } from "@/data/navigation";
-import { formatUsd, type PricingTier } from "@/data/pricing";
+import { formatMoney, type PricingTier } from "@/data/pricing";
 import { useLocale } from "@/components/providers/locale-provider";
 
 type PricingCardProps = {
@@ -42,7 +42,7 @@ function CheckIcon({ emphasized }: { emphasized?: boolean }) {
 export function PricingCard({ tier }: PricingCardProps) {
   const highlighted = Boolean(tier.highlighted);
   const reduceMotion = useReducedMotion();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
 
   return (
     <motion.article
@@ -115,13 +115,14 @@ export function PricingCard({ tier }: PricingCardProps) {
                   : "text-[2.35rem] sm:text-[2.6rem]",
               )}
             >
-              {tier.setupUsd !== null ? `$${formatUsd(tier.setupUsd)}` : "—"}
+              {formatMoney(tier.setupDkk, tier.setupUsd, locale)}
             </p>
             <span className="text-sm text-text-secondary">{t.pricing.setup}</span>
           </div>
-          {tier.monthlyUsd !== null ? (
+          {tier.monthlyDkk !== null || tier.monthlyUsd !== null ? (
             <p className="mt-2 text-sm text-text-secondary">
-              ${formatUsd(tier.monthlyUsd)} {t.pricing.perMonth}
+              {formatMoney(tier.monthlyDkk, tier.monthlyUsd, locale)}{" "}
+              {t.pricing.perMonth}
             </p>
           ) : null}
         </div>
