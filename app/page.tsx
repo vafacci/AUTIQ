@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { WorkflowSection } from "@/components/sections/WorkflowSection";
 import { PlatformsSection } from "@/components/sections/PlatformsSection";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { TrustSection } from "@/components/sections/TrustSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <WorkflowSection />
         <PlatformsSection />
         <PricingSection />
+        <TrustSection />
         <FaqSection />
       </main>
       <SiteFooter />

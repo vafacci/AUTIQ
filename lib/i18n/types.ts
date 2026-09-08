@@ -62,6 +62,18 @@ export type Dictionary = {
       }
     >;
   };
+  trust: {
+    eyebrow: string;
+    headline: string;
+    support: string;
+    metricValue: string;
+    metricLabel: string;
+    points: {
+      tested: string;
+      live: string;
+      control: string;
+    };
+  };
   qa: {
     items: Record<
       string,

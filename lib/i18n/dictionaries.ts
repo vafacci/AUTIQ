@@ -99,6 +99,19 @@ export const da: Dictionary = {
       },
     },
   },
+  trust: {
+    eyebrow: "Tryghed",
+    headline: "Sikker i drift. Mærkbar i timer.",
+    support:
+      "Systemet er testet gentagne gange og kører allerede for flere kunder — med din godkendelse, hvor det betyder noget.",
+    metricValue: "8+",
+    metricLabel: "timer sparet pr. uge",
+    points: {
+      tested: "Testet igen og igen, før det går live",
+      live: "Allerede i brug hos flere kunder",
+      control: "Intet publiceres uden din godkendelse",
+    },
+  },
   qa: {
     items: {
       control: {
@@ -247,6 +260,19 @@ export const en: Dictionary = {
           "Priority support",
         ],
       },
+    },
+  },
+  trust: {
+    eyebrow: "Trust",
+    headline: "Safe in production. Clear in hours saved.",
+    support:
+      "The system has been tested repeatedly and already runs for multiple customers — with your approval where it matters.",
+    metricValue: "8+",
+    metricLabel: "hours saved per week",
+    points: {
+      tested: "Tested again and again before going live",
+      live: "Already running for multiple customers",
+      control: "Nothing publishes without your approval",
     },
   },
   qa: {
