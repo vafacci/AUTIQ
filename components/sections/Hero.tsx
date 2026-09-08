@@ -4,13 +4,15 @@ import { motion, useReducedMotion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { LiquidOrb } from "./hero/LiquidOrb";
-import { heroPlatforms } from "@/data/platforms";
+import { HeroPlatformSignal } from "./hero/HeroPlatformSignal";
+import { useLocale } from "@/components/providers/locale-provider";
 
 const heroCtaClass =
   "h-10 w-[9.75rem] px-0 text-[11px] font-medium uppercase tracking-[0.08em]";
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
+  const { t } = useLocale();
 
   const fade = (delay = 0) =>
     reduceMotion
@@ -28,7 +30,6 @@ export function Hero() {
       aria-labelledby="hero-heading"
     >
       <div className="relative mx-auto w-full max-w-[68rem] px-[var(--space-content-x)]">
-        {/* Mobile / tablet: compact orb, top-right — close to the headline */}
         <motion.div
           className="pointer-events-none absolute -top-1 right-0 z-0 w-[6.5rem] sm:w-[7.75rem] md:w-[8.5rem] lg:hidden"
           {...fade(0.1)}
@@ -39,49 +40,43 @@ export function Hero() {
 
         <div className="relative z-10 grid w-full items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-8 xl:gap-10">
           <div className="flex max-w-lg flex-col justify-center lg:max-w-none lg:pr-2">
+            <motion.div className="mb-4 sm:mb-5" {...fade(0)}>
+              <HeroPlatformSignal />
+            </motion.div>
+
             <motion.h1
               id="hero-heading"
               className="pr-[6.75rem] text-[2.125rem] leading-[1.08] tracking-tight text-text-primary sm:pr-36 sm:text-[2.75rem] lg:pr-0 lg:text-[3rem] xl:text-[3.15rem]"
-              {...fade(0)}
+              {...fade(0.04)}
             >
-              Your content,
+              {t.hero.headlineLine1}
               <br />
-              moving by itself.
+              {t.hero.headlineLine2}
             </motion.h1>
 
             <motion.div
               className="mt-5 max-w-md space-y-3 text-[0.975rem] leading-relaxed text-text-secondary sm:mt-6 sm:text-base"
-              {...fade(0.06)}
+              {...fade(0.08)}
             >
-              <p>
-                From finished content to approved, scheduled and published —
-                automatically.
-              </p>
-              <p>You stay in control where it matters.</p>
+              <p>{t.hero.body1}</p>
+              <p>{t.hero.body2}</p>
             </motion.div>
 
             <motion.div
               className="mt-8 flex flex-row flex-wrap items-center gap-3 sm:mt-9"
-              {...fade(0.12)}
+              {...fade(0.14)}
             >
               <ButtonLink href="/book" className={heroCtaClass}>
-                Book a call
+                {t.hero.book}
               </ButtonLink>
               <ButtonLink
                 href="#how-it-works"
                 variant="secondary"
                 className={heroCtaClass}
               >
-                How it works
+                {t.hero.howItWorks}
               </ButtonLink>
             </motion.div>
-
-            <motion.p
-              className="mt-7 font-status text-[10px] tracking-[0.14em] text-text-secondary sm:mt-8"
-              {...fade(0.18)}
-            >
-              {heroPlatforms.join("  ·  ")}
-            </motion.p>
           </div>
 
           <motion.div
@@ -96,7 +91,7 @@ export function Hero() {
       <motion.a
         href="#how-it-works"
         className="absolute bottom-5 left-1/2 z-10 inline-flex size-10 -translate-x-1/2 items-center justify-center text-text-secondary/55 transition-colors hover:text-text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border sm:bottom-6"
-        aria-label="Scroll to how it works"
+        aria-label={t.hero.scrollLabel}
         {...fade(0.35)}
       >
         <motion.span

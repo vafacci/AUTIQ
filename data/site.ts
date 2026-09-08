@@ -7,7 +7,11 @@ export const site = {
   tagline: "Automate the repetitive work without giving up control.",
   description:
     "AUTIQ builds automation systems for creators and content teams — moving finished content from creation to publication, with human control where it matters.",
-  url: "https://example.com",
-  locale: "en",
+  url: "https://autiq.dk",
+  locale: "da",
   currency: "USD",
+  email: "vafaivafai@gmail.com",
+  phone: "+45 20996967",
+  phoneHref: "tel:+4520996967",
+  emailHref: "mailto:vafaivafai@gmail.com",
 } as const;

@@ -2,12 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import {
-  bookingDetails,
-  bookingIntro,
-  bookingSuccess,
-  resolveCalLink,
-} from "@/data/booking";
+import { resolveCalLink } from "@/data/booking";
+import { useLocale } from "@/components/providers/locale-provider";
 import { CalEmbed } from "./CalEmbed";
 
 type Step = "book" | "success";
@@ -15,6 +11,7 @@ type Step = "book" | "success";
 export function BookingExperience() {
   const [step, setStep] = useState<Step>("book");
   const calLink = useMemo(() => resolveCalLink(), []);
+  const { t } = useLocale();
 
   if (step === "success") {
     return (
@@ -23,20 +20,20 @@ export function BookingExperience() {
         aria-labelledby="success-heading"
       >
         <p className="font-status text-[11px] tracking-[0.14em] text-text-secondary">
-          {bookingSuccess.eyebrow}
+          {t.booking.successEyebrow}
         </p>
         <h2
           id="success-heading"
           className="mt-3 text-[2rem] leading-[1.1] tracking-tight text-text-primary sm:text-[2.25rem]"
         >
-          {bookingSuccess.headline}
+          {t.booking.successHeadline}
         </h2>
         <p className="mt-4 max-w-md text-[0.975rem] leading-relaxed text-text-secondary">
-          {bookingSuccess.support}
+          {t.booking.successSupport}
         </p>
         <div className="mt-10">
           <ButtonLink href="/" className="h-10 px-5 text-[12px]">
-            Back to AUTIQ
+            {t.booking.backHome}
           </ButtonLink>
         </div>
       </section>
@@ -47,25 +44,31 @@ export function BookingExperience() {
     <section className="w-full" aria-labelledby="booking-heading">
       <div className="mx-auto max-w-[40rem] text-center sm:max-w-none">
         <p className="font-status text-[11px] tracking-[0.14em] text-text-secondary">
-          {bookingIntro.eyebrow}
+          {t.booking.eyebrow}
         </p>
         <h1
           id="booking-heading"
           className="mt-3 text-[2rem] leading-[1.1] tracking-tight text-text-primary sm:text-[2.35rem]"
         >
-          {bookingIntro.headline}
+          {t.booking.headline}
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-[0.975rem] leading-relaxed text-text-secondary">
-          {bookingIntro.support}
+          {t.booking.support}
         </p>
 
         <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-          {bookingDetails.map((item) => (
+          {(
+            [
+              t.booking.details.duration,
+              t.booking.details.format,
+              t.booking.details.commitment,
+            ] as const
+          ).map((label) => (
             <li
-              key={item.id}
+              key={label}
               className="font-status text-[10px] tracking-[0.12em] text-text-secondary"
             >
-              {item.label}
+              {label}
             </li>
           ))}
         </ul>

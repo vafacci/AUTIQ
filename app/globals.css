@@ -111,6 +111,23 @@
   background-color: var(--atom-background);
 }
 
+@media (min-width: 1024px) {
+  .gallery-3d-stage {
+    perspective: 1280px;
+    /* Desktop: push further out + taller lane spacing */
+    --x-push: 36rem;
+    --spread: 10rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .gallery-3d-stage {
+    --x-push: 42rem;
+    --spread: 11rem;
+    perspective: 1400px;
+  }
+}
+
 .gallery-3d-copy {
   position: absolute;
   top: 50%;
@@ -127,7 +144,7 @@
   position: absolute;
   inset-inline: 0;
   margin: auto;
-  width: 20rem;
+  width: min(16.5rem, 40vw);
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border-radius: 0.35rem;
@@ -136,10 +153,20 @@
   opacity: 0;
 }
 
+@media (min-width: 1024px) {
+  .gallery-3d-img {
+    /* Slightly smaller cards = less visual overlap on wide screens */
+    width: min(14.5rem, 18vw);
+  }
+}
+
 .gallery-3d-img--odd {
   left: var(--left, 0rem);
   transform: translateZ(var(--translate-z))
-    translate(-25rem, calc((var(--i) - (var(--count) + 1) / 2) * 8rem));
+    translate(
+      calc(var(--x-push, 22rem) * -1),
+      calc((var(--lane) - (var(--lanes) + 1) / 2) * var(--spread, 7.5rem))
+    );
   animation:
     gallery-3d-move var(--duration) linear infinite,
     gallery-3d-opacity var(--duration) linear infinite;
@@ -151,7 +178,12 @@
 .gallery-3d-img--even {
   right: var(--right, 0rem);
   transform: translateZ(var(--translate-z))
-    translate(25rem, calc((var(--i) - (var(--count) + 1) / 2) * -8rem));
+    translate(
+      var(--x-push, 22rem),
+      calc(
+        (var(--lane) - (var(--lanes) + 1) / 2) * calc(var(--spread, 7.5rem) * -1)
+      )
+    );
   animation:
     gallery-3d-move var(--duration) linear infinite,
     gallery-3d-opacity var(--duration) linear infinite;
@@ -169,15 +201,22 @@
   animation-play-state: paused;
 }
 
+/*
+  ~TARGET_VISIBLE / count of the loop in the near-camera band.
+  Slightly tighter than before so depth doesn't read as one pile.
+*/
 @keyframes gallery-3d-opacity {
-  0% {
+  0%,
+  46% {
     opacity: 0;
   }
-  20%,
-  80% {
+  52% {
     opacity: 1;
   }
-  90%,
+  66% {
+    opacity: 1;
+  }
+  72%,
   100% {
     opacity: 0;
   }
@@ -185,11 +224,10 @@
 
 @keyframes gallery-3d-move {
   0% {
-    opacity: 0;
-    --translate-z: -5000px;
+    --translate-z: -5200px;
   }
   100% {
-    --translate-z: 2000px;
+    --translate-z: 1400px;
   }
 }
 

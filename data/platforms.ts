@@ -23,3 +23,10 @@ export const heroPlatforms = [
   "TikTok",
   "YouTube",
 ] as const;
+
+/** Hero platform icons */
+export const heroPlatformOutputs = [
+  { id: "instagram", label: "Instagram" },
+  { id: "tiktok", label: "TikTok" },
+  { id: "youtube", label: "YouTube" },
+] as const;

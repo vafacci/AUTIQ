@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { cn } from "@/lib/cn";
 import { primaryCta } from "@/data/navigation";
 import { formatUsd, type PricingTier } from "@/data/pricing";
+import { useLocale } from "@/components/providers/locale-provider";
 
 type PricingCardProps = {
   tier: PricingTier;
@@ -41,6 +42,7 @@ function CheckIcon({ emphasized }: { emphasized?: boolean }) {
 export function PricingCard({ tier }: PricingCardProps) {
   const highlighted = Boolean(tier.highlighted);
   const reduceMotion = useReducedMotion();
+  const { t } = useLocale();
 
   return (
     <motion.article
@@ -115,11 +117,11 @@ export function PricingCard({ tier }: PricingCardProps) {
             >
               {tier.setupUsd !== null ? `$${formatUsd(tier.setupUsd)}` : "—"}
             </p>
-            <span className="text-sm text-text-secondary">setup</span>
+            <span className="text-sm text-text-secondary">{t.pricing.setup}</span>
           </div>
           {tier.monthlyUsd !== null ? (
             <p className="mt-2 text-sm text-text-secondary">
-              ${formatUsd(tier.monthlyUsd)} / month
+              ${formatUsd(tier.monthlyUsd)} {t.pricing.perMonth}
             </p>
           ) : null}
         </div>
@@ -135,7 +137,7 @@ export function PricingCard({ tier }: PricingCardProps) {
           variant={highlighted ? "primary" : "secondary"}
           className="w-full min-h-[44px] tracking-[0.06em]"
         >
-          Book a call
+          {t.pricing.book}
         </ButtonLink>
 
         {tier.inclusions.length > 0 ? (

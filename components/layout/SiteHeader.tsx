@@ -3,8 +3,11 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { site } from "@/data/site";
-import { navLinks, primaryCta } from "@/data/navigation";
+import { primaryCta } from "@/data/navigation";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
+import { useLocale } from "@/components/providers/locale-provider";
+import { useNavLinks } from "@/lib/i18n/use-localized-content";
 import { cn } from "@/lib/cn";
 
 type SiteHeaderProps = {
@@ -19,6 +22,8 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
   const lastY = useRef(0);
   const menuId = useId();
   const isBooking = variant === "booking";
+  const { t } = useLocale();
+  const navLinks = useNavLinks();
 
   useEffect(() => {
     if (!open) return;
@@ -85,17 +90,20 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
         </a>
 
         {isBooking ? (
-          <a
-            href="/"
-            className="text-sm text-text-secondary transition-colors hover:text-text-primary"
-          >
-            Back
-          </a>
+          <div className="flex items-center gap-5">
+            <LanguageSwitch />
+            <a
+              href="/"
+              className="text-sm text-text-secondary transition-colors hover:text-text-primary"
+            >
+              {t.nav.back}
+            </a>
+          </div>
         ) : (
           <>
             <nav
               className="hidden items-center gap-8 md:flex"
-              aria-label="Primary"
+              aria-label={t.nav.primary}
             >
               {navLinks.map((link) => (
                 <a
@@ -106,28 +114,32 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
                   {link.label}
                 </a>
               ))}
+              <LanguageSwitch className="ml-1" />
               <ButtonLink
                 href={primaryCta.href}
                 className="ml-2 h-9 px-4 py-0 text-[12px]"
               >
-                {primaryCta.label}
+                {t.nav.book}
               </ButtonLink>
             </nav>
 
-            <button
-              type="button"
-              className="inline-flex size-10 items-center justify-center rounded-[4px] text-text-primary md:hidden"
-              aria-expanded={open}
-              aria-controls={menuId}
-              aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setOpen((value) => !value)}
-            >
-              {open ? (
-                <X size={20} strokeWidth={1.5} />
-              ) : (
-                <Menu size={20} strokeWidth={1.5} />
-              )}
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <LanguageSwitch />
+              <button
+                type="button"
+                className="inline-flex size-10 items-center justify-center rounded-[4px] text-text-primary"
+                aria-expanded={open}
+                aria-controls={menuId}
+                aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
+                onClick={() => setOpen((value) => !value)}
+              >
+                {open ? (
+                  <X size={20} strokeWidth={1.5} />
+                ) : (
+                  <Menu size={20} strokeWidth={1.5} />
+                )}
+              </button>
+            </div>
           </>
         )}
       </div>
@@ -142,7 +154,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
         >
           <nav
             className="mx-auto flex max-w-[72rem] flex-col gap-1 px-[var(--space-content-x)] py-4"
-            aria-label="Mobile"
+            aria-label={t.nav.mobile}
           >
             {navLinks.map((link) => (
               <a
@@ -160,7 +172,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
                 className="h-10 w-full px-4 py-0 text-[12px]"
                 onClick={() => setOpen(false)}
               >
-                {primaryCta.label}
+                {t.nav.book}
               </ButtonLink>
             </div>
           </nav>

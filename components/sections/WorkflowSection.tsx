@@ -4,11 +4,10 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import {
-  workflowIntro,
-  workflowStages,
-} from "@/data/workflow-stages";
+import { workflowStages } from "@/data/workflow-stages";
 import { WorkflowVisual } from "./workflow/WorkflowVisual";
+import { useLocale } from "@/components/providers/locale-provider";
+import { useLocalizedWorkflowStages } from "@/lib/i18n/use-localized-content";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -21,6 +20,8 @@ export function WorkflowSection() {
   const visualRef = useRef<HTMLDivElement>(null);
   const mobilePinRef = useRef<HTMLDivElement>(null);
   const mobileVisualRef = useRef<HTMLDivElement>(null);
+  const { t } = useLocale();
+  const localizedStages = useLocalizedWorkflowStages();
 
   useGSAP(
     () => {
@@ -112,7 +113,7 @@ export function WorkflowSection() {
 
       return () => mm.revert();
     },
-    { scope: sectionRef },
+    { scope: sectionRef, dependencies: [localizedStages] },
   );
 
   return (
@@ -131,16 +132,16 @@ export function WorkflowSection() {
                 id="workflow-heading"
                 className="text-[1.85rem] leading-[1.12] tracking-tight text-text-primary xl:text-[2.15rem]"
               >
-                {workflowIntro.headlineLine1}
+                {t.workflow.headlineLine1}
                 <br />
-                {workflowIntro.headlineLine2}
+                {t.workflow.headlineLine2}
               </h2>
               <p className="mt-3 max-w-[22rem] text-base text-text-secondary">
-                {workflowIntro.support}
+                {t.workflow.support}
               </p>
 
               <div className="relative mt-6 h-[5.5rem]">
-                {workflowStages.map((stage, index) => (
+                {localizedStages.map((stage, index) => (
                   <div
                     key={stage.id}
                     data-stage-copy={index}
@@ -168,7 +169,7 @@ export function WorkflowSection() {
               ref={visualRef}
               className="min-w-0 translate-y-3 xl:translate-y-4"
             >
-              <WorkflowVisual />
+              <WorkflowVisual stages={localizedStages} />
             </div>
           </div>
         </div>
@@ -176,18 +177,18 @@ export function WorkflowSection() {
 
       {/* Mobile: same mental model — stacked, pinned, scroll-driven */}
       <div ref={mobilePinRef} className="lg:hidden">
-        <div className="mx-auto flex min-h-dvh max-w-[68rem] flex-col justify-center px-[var(--space-content-x)] py-14">
-          <h2 className="text-[1.65rem] leading-[1.12] tracking-tight text-text-primary">
-            {workflowIntro.headlineLine1}
+        <div className="mx-auto flex min-h-dvh max-w-[68rem] flex-col justify-center px-[var(--space-content-x)] py-10">
+          <h2 className="text-[1.45rem] leading-[1.12] tracking-tight text-text-primary sm:text-[1.65rem]">
+            {t.workflow.headlineLine1}
             <br />
-            {workflowIntro.headlineLine2}
+            {t.workflow.headlineLine2}
           </h2>
-          <p className="mt-3 text-[0.975rem] text-text-secondary">
-            {workflowIntro.support}
+          <p className="mt-2 text-[0.9rem] text-text-secondary">
+            {t.workflow.support}
           </p>
 
-          <div className="relative mt-6 h-[4.75rem]">
-            {workflowStages.map((stage, index) => (
+          <div className="relative mt-4 h-[3.75rem]">
+            {localizedStages.map((stage, index) => (
               <div
                 key={stage.id}
                 data-stage-copy-mobile={index}
@@ -198,20 +199,24 @@ export function WorkflowSection() {
                 }}
                 aria-hidden={index !== 0}
               >
-                <p className="font-status text-[11px] tracking-[0.12em] text-text-secondary uppercase">
+                <p className="font-status text-[10px] tracking-[0.12em] text-text-secondary uppercase">
                   <span className="text-signal">{stage.index}</span>
                   <span className="mx-1.5 text-border">/</span>
                   {stage.title}
                 </p>
-                <p className="mt-2 text-[0.975rem] leading-relaxed text-text-primary">
+                <p className="mt-1.5 text-[0.9rem] leading-snug text-text-primary">
                   {stage.microcopy}
                 </p>
               </div>
             ))}
           </div>
 
-          <div ref={mobileVisualRef} className="mt-8">
-            <WorkflowVisual compact />
+          <div ref={mobileVisualRef} className="mt-5">
+            <WorkflowVisual
+              compact
+              orientation="vertical"
+              stages={localizedStages}
+            />
           </div>
         </div>
       </div>
@@ -457,11 +462,18 @@ function setConnectors(root: Element, progress: number) {
   const segments = fills.length;
   if (!segments) return;
 
+  const vertical = root.getAttribute("data-orientation") === "vertical";
   const scaled = Math.min(1, Math.max(0, progress)) * segments;
 
   fills.forEach((fill, i) => {
     const local = Math.min(1, Math.max(0, scaled - i));
-    fill.style.width = `${local * 100}%`;
+    if (vertical) {
+      fill.style.height = `${local * 100}%`;
+      fill.style.width = "100%";
+    } else {
+      fill.style.width = `${local * 100}%`;
+      fill.style.height = "100%";
+    }
   });
 }
 

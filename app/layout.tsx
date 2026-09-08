@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { MotionProvider } from "@/components/providers/motion-provider";
+import { LocaleProvider } from "@/components/providers/locale-provider";
 import { site } from "@/data/site";
+import { da } from "@/lib/i18n/dictionaries";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,13 +12,14 @@ export const metadata: Metadata = {
     default: site.name,
     template: `%s · ${site.name}`,
   },
-  description: site.description,
+  description: da.meta.description,
   metadataBase: new URL(site.url),
   openGraph: {
     title: site.name,
-    description: site.description,
+    description: da.meta.description,
     siteName: site.name,
     type: "website",
+    locale: "da_DK",
   },
 };
 
@@ -32,11 +35,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="da"
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="font-sans antialiased">
-        <MotionProvider>{children}</MotionProvider>
+        <LocaleProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </LocaleProvider>
       </body>
     </html>
   );
