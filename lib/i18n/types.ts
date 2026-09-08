@@ -66,12 +66,10 @@ export type Dictionary = {
     eyebrow: string;
     headline: string;
     support: string;
-    metricValue: string;
-    metricLabel: string;
-    points: {
-      tested: string;
-      live: string;
-      control: string;
+    stats: {
+      hours: { value: string; label: string };
+      posts: { value: string; label: string };
+      clients: { value: string; label: string };
     };
   };
   qa: {

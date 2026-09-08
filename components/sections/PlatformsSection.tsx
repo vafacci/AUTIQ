@@ -98,7 +98,7 @@ export function PlatformsSection() {
           <ul className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {items.map((item) => (
               <li
-                key={item.id}
+                key={item.src}
                 className="relative aspect-[3/4] overflow-hidden rounded-[0.35rem]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -145,7 +145,7 @@ export function PlatformsSection() {
           return (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              key={item.id}
+              key={item.src}
               src={item.src}
               alt={item.alt}
               className={cn(
