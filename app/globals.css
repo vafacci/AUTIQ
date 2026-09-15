@@ -138,6 +138,9 @@
   transform: translate(-50%, -50%);
   text-align: center;
   pointer-events: none;
+  text-shadow:
+    0 0 1rem rgba(0, 0, 0, 0.55),
+    0 0 2.5rem rgba(0, 0, 0, 0.35);
 }
 
 .gallery-3d-img {
@@ -197,26 +200,21 @@
   animation-play-state: paused;
 }
 
-.gallery-3d-stage:not([data-active="true"]) .gallery-3d-img {
+/* Pause only when fully off-screen — never leave the section looking empty */
+.gallery-3d-stage[data-active="false"] .gallery-3d-img {
   animation-play-state: paused;
 }
 
-/*
-  ~TARGET_VISIBLE / count of the loop in the near-camera band.
-  Slightly tighter than before so depth doesn't read as one pile.
-*/
+/* CodePen visibility window — wide enough that the tunnel never reads as black */
 @keyframes gallery-3d-opacity {
-  0%,
-  46% {
+  0% {
     opacity: 0;
   }
-  52% {
+  18%,
+  78% {
     opacity: 1;
   }
-  66% {
-    opacity: 1;
-  }
-  72%,
+  90%,
   100% {
     opacity: 0;
   }
@@ -224,10 +222,10 @@
 
 @keyframes gallery-3d-move {
   0% {
-    --translate-z: -5200px;
+    --translate-z: -5000px;
   }
   100% {
-    --translate-z: 1400px;
+    --translate-z: 2000px;
   }
 }
 

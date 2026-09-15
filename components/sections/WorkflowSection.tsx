@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -20,7 +20,7 @@ export function WorkflowSection() {
   const visualRef = useRef<HTMLDivElement>(null);
   const mobilePinRef = useRef<HTMLDivElement>(null);
   const mobileVisualRef = useRef<HTMLDivElement>(null);
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const localizedStages = useLocalizedWorkflowStages();
 
   useGSAP(
@@ -50,10 +50,13 @@ export function WorkflowSection() {
             );
             const cleanups: Array<() => void> = [];
 
-            const desktopCopies =
-              gsap.utils.toArray<HTMLElement>("[data-stage-copy]");
+            const desktopCopies = gsap.utils.toArray<HTMLElement>(
+              "[data-stage-copy]",
+              section,
+            );
             const mobileCopies = gsap.utils.toArray<HTMLElement>(
               "[data-stage-copy-mobile]",
+              section,
             );
 
             [desktopVisual, mobileVisual].forEach((root, idx) => {
@@ -82,8 +85,10 @@ export function WorkflowSection() {
               visualRef.current?.querySelector(".workflow-visual");
             if (!pin || !visualRoot) return;
 
-            const copies =
-              gsap.utils.toArray<HTMLElement>("[data-stage-copy]");
+            const copies = gsap.utils.toArray<HTMLElement>(
+              "[data-stage-copy]",
+              pin,
+            );
             return bindPinnedWorkflow({
               pin,
               visualRoot,
@@ -100,6 +105,7 @@ export function WorkflowSection() {
 
             const copies = gsap.utils.toArray<HTMLElement>(
               "[data-stage-copy-mobile]",
+              pin,
             );
             return bindPinnedWorkflow({
               pin,
@@ -113,8 +119,18 @@ export function WorkflowSection() {
 
       return () => mm.revert();
     },
-    { scope: sectionRef, dependencies: [localizedStages] },
+    // Do NOT depend on locale/copy — remounting the pin on language switch
+    // breaks ScrollTrigger (animation appears skipped). Text can update in place.
+    { scope: sectionRef },
   );
+
+  // After language switch, layout heights change — refresh pin start/end only.
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [locale]);
 
   return (
     <section

@@ -18,7 +18,7 @@ import { useLocale } from "@/components/providers/locale-provider";
  * - Desktop CSS widens X push + vertical spread and slightly shrinks card size
  */
 const TARGET_VISIBLE = 5;
-const FLY_DURATION_SEC = 36;
+const FLY_DURATION_SEC = 20;
 const VERTICAL_LANES = 10;
 /** Coprime with VERTICAL_LANES → consecutive indices skip across the frame */
 const LANE_STEP = 7;
@@ -31,7 +31,7 @@ const GOLDEN = 0.6180339887498949;
 export function PlatformsSection() {
   const reduceMotion = useReducedMotion();
   const stageRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const { t } = useLocale();
 
   const items = contentGalleryItems;
@@ -43,7 +43,7 @@ export function PlatformsSection() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setActive(Boolean(entry?.isIntersecting)),
-      { rootMargin: "40px 0px", threshold: 0.08 },
+      { rootMargin: "120px 0px", threshold: 0.02 },
     );
     observer.observe(stage);
     return () => observer.disconnect();
