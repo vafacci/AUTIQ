@@ -101,13 +101,15 @@ export const da: Dictionary = {
   },
   trust: {
     eyebrow: "Tryghed",
-    headline: "Beviset ligger i tallene",
+    headline: "Sikker i drift. Mærkbar i timer.",
     support:
-      "Systemet er testet igen og igen, og kører nu i drift for 8+ kunder — med din godkendelse, hvor det betyder noget.",
-    stats: {
-      hours: { value: "10+", label: "timer sparet om ugen" },
-      posts: { value: "500+", label: "opslag publiceret automatisk" },
-      clients: { value: "8+", label: "aktive kunder" },
+      "Systemet er testet gentagne gange og kører allerede for flere kunder — med din godkendelse, hvor det betyder noget.",
+    metricValue: "8+",
+    metricLabel: "timer sparet pr. uge",
+    points: {
+      tested: "Testet igen og igen, før det går live",
+      live: "Allerede i brug hos flere kunder",
+      control: "Intet publiceres uden din godkendelse",
     },
   },
   qa: {
@@ -262,13 +264,15 @@ export const en: Dictionary = {
   },
   trust: {
     eyebrow: "Trust",
-    headline: "The proof is in the numbers",
+    headline: "Safe in production. Clear in hours saved.",
     support:
-      "The system has been tested again and again, and now runs in production for 8+ customers — with your approval where it matters.",
-    stats: {
-      hours: { value: "10+", label: "hours saved per week" },
-      posts: { value: "500+", label: "posts published automatically" },
-      clients: { value: "8+", label: "active customers" },
+      "The system has been tested repeatedly and already runs for multiple customers — with your approval where it matters.",
+    metricValue: "8+",
+    metricLabel: "hours saved per week",
+    points: {
+      tested: "Tested again and again before going live",
+      live: "Already running for multiple customers",
+      control: "Nothing publishes without your approval",
     },
   },
   qa: {

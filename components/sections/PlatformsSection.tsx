@@ -18,7 +18,7 @@ import { useLocale } from "@/components/providers/locale-provider";
  * - Desktop CSS widens X push + vertical spread and slightly shrinks card size
  */
 const TARGET_VISIBLE = 5;
-const FLY_DURATION_SEC = 20;
+const FLY_DURATION_SEC = 36;
 const VERTICAL_LANES = 10;
 /** Coprime with VERTICAL_LANES → consecutive indices skip across the frame */
 const LANE_STEP = 7;
@@ -31,7 +31,7 @@ const GOLDEN = 0.6180339887498949;
 export function PlatformsSection() {
   const reduceMotion = useReducedMotion();
   const stageRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const { t } = useLocale();
 
   const items = contentGalleryItems;
@@ -43,7 +43,7 @@ export function PlatformsSection() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setActive(Boolean(entry?.isIntersecting)),
-      { rootMargin: "120px 0px", threshold: 0.02 },
+      { rootMargin: "40px 0px", threshold: 0.08 },
     );
     observer.observe(stage);
     return () => observer.disconnect();
@@ -98,7 +98,7 @@ export function PlatformsSection() {
           <ul className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {items.map((item) => (
               <li
-                key={item.src}
+                key={item.id}
                 className="relative aspect-[3/4] overflow-hidden rounded-[0.35rem]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -145,7 +145,7 @@ export function PlatformsSection() {
           return (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              key={item.src}
+              key={item.id}
               src={item.src}
               alt={item.alt}
               className={cn(
